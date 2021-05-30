@@ -1,6 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import Champion, { IChampion } from '../../../../models/champion';
-import { Database } from '../../../../models/database';
+import { IChampion } from '../../../../models/champion';
 
 export default async (req: NextApiRequest, res: NextApiResponse<IChampion>) => {
   const {
@@ -10,10 +9,7 @@ export default async (req: NextApiRequest, res: NextApiResponse<IChampion>) => {
 
   if (method === 'POST') {
     try {
-      await Database.run('mongodb://localhost:27017/lolpa', async () => {
-        let newChampion = await createChampion(body);
-        res.status(201).json(newChampion);
-      });
+      res.status(201).json(body);
     } catch (error) {
       res.status(500).end(error.message);
     }
@@ -22,8 +18,3 @@ export default async (req: NextApiRequest, res: NextApiResponse<IChampion>) => {
     res.status(405).end(`Method ${method} Not Allowed`)
   }
 };
-
-const createChampion = (newChampion: IChampion) => {
-  const championModel = new Champion(newChampion);
-  return championModel.save();
-}
