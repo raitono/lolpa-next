@@ -1,4 +1,4 @@
-import Champion from  '../components/champion';
+import Champion from '../components/champion';
 
 export default function Champions() {
   return (
