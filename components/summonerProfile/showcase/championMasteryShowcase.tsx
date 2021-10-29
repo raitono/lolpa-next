@@ -33,7 +33,7 @@ const ChampionMasteryShowcase: React.FC<ChampionMasteryShowcaseProps> = ({ champ
         <div className="relative">
           <img className="w-200px" alt={champion} src={`http://ddragon.leagueoflegends.com/cdn/${process.env.NEXT_PUBLIC_CURRENT_PATCH}/img/champion/${champion}.png`} />
           <img className="absolute w-24 top-0 left-0" alt="Mastery Badge" src={`/champion-mastery/${masteryData.championLevel}.png`} />
-          <span className="absolute bottom-1 left-3 text-alabaster text-6xl">{masteryData.championPoints.toLocaleString()}</span>
+          <span className="absolute bottom-1 left-1/2 transform -translate-x-1/2 text-alabaster text-6xl">{masteryData.championPoints.toLocaleString()}</span>
         </div>
       </>
     );
