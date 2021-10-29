@@ -1,4 +1,4 @@
-import { RiotImage } from "./riotImage";
+import { RiotImage } from "./riot/riotImage";
 
 export interface IChampion {
   id: string,

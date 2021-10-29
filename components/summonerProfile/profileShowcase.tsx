@@ -1,5 +1,7 @@
+import RiotQueueType from "../../models/riot/riotQueueType";
 import ChampionMasteryShowcase from "./showcase/championMasteryShowcase";
 import MasteryPointShowcase from "./showcase/masteryPointsShowcase";
+import RankedShowcase from "./showcase/rankedShowcase";
 
 interface ProfileShowcaseProps {
   summonerName: string;
@@ -10,6 +12,7 @@ const ProfileShowcase: React.FC<ProfileShowcaseProps> = ({ summonerName }: Profi
     <div className="flex justify-between m-2">
       <ChampionMasteryShowcase summonerName={summonerName} useHighest />
       <MasteryPointShowcase summonerName={summonerName} />
+      <RankedShowcase summonerName={summonerName} queueType={RiotQueueType.RANKED_SOLO} />
     </div>
   );
 }
