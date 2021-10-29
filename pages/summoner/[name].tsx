@@ -5,6 +5,7 @@ import { ISummoner } from '../../models/summoner';
 import ProfileHeader from "../../components/summonerProfile/profileHeader";
 import SearchHeader from '../../components/searchHeader';
 import ProfileShowcase from '../../components/summonerProfile/profileShowcase';
+import ProfileTabs from '../../components/summonerProfile/profileTabs';
 
 export default function SummonerProfile() {
   const router = useRouter();
@@ -25,6 +26,7 @@ export default function SummonerProfile() {
         <SearchHeader />
         <ProfileHeader summonerName={summoner.name} summonerLevel={summoner.summonerLevel} profileIconId={summoner.profileIconId} ></ProfileHeader>
         <ProfileShowcase summonerName={summoner.name} />
+        <ProfileTabs summonerName={summoner.name} />
       </>
     );
   else
