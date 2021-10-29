@@ -17,9 +17,10 @@ const MasteryPointShowcase: React.FC<MasteryPointShowcaseProps> = ({ summonerNam
 
   return (
     <>
-      <div className="relative w-200px bg-alabaster">
-        <img className="absolute w-32 top-0 left-1/2 transform -translate-x-1/2" alt="Mastery Badge" src={`/champion-mastery/7.png`} />
-        <span className="absolute bottom-1 left-1/2 transform -translate-x-1/2 text-black text-6xl">{masteryPoints}</span>
+      <div className="w-200px h-200px flex flex-col items-center bg-alabaster">
+        <img className="w-28" alt="Mastery Badge" src={`/champion-mastery/7.png`} />
+        <div className="text-3xl">Mastery Points</div>
+        <span className="bottom-1 text-black text-5xl">{masteryPoints}</span>
       </div>
     </>
   );
