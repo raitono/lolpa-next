@@ -43,17 +43,19 @@ const MatchList: React.FC<MatchListProps> = ({ summonerName }: MatchListProps) =
   }, []);
 
   if (matches && runes) {
-    return (
-      <>
-        {matches.map(m => <MatchSummary key={m.metadata.matchId} match={m} summonerName={summonerName} runes={runes} />)}
-      </>
-    );
+    if (matches.length) {
+      return (
+        <>
+          {matches.map(m => <MatchSummary key={m.metadata.matchId} match={m} summonerName={summonerName} runes={runes} />)}
+        </>
+      );
+    } else {
+      return <div className="text-center font-bold text-3xl">No matches found for {summonerName}</div>
+    }
   }
 
   return (
-    <>
-      <div>Loading matches for {summonerName}...</div>
-    </>
+    <div className="text-center font-bold text-3xl">Loading matches for {summonerName}...</div>
   );
 };
 
@@ -124,55 +126,62 @@ const MatchSummary: React.FC<MatchSummaryProps> = ({ summonerName, match, runes 
   return (
     <>
       <div data-match-win={team.win}>{/* theme div */}
-        <div className="flex items-center my-1 py-2 border win:border-nord14/80 loss:border-nord11/50">{/* content border/bg */}
-          <div className="flex flex-col items-center w-[175px]">{/* Result and items */}
-            <div className=" text-xl px-2 py-1 mb-1 win:bg-nord14/50 loss:bg-nord11/50">{team.win ? "Victory" : "Defeat"}</div>
-            <div>{participant.totalMinionsKilled} CS ({(participant.totalMinionsKilled / (match.info.gameDuration / 60)).toFixed(2)} CS/M)</div>
-            <div>{participant.kills}/{participant.deaths}/{participant.assists} ({(participant.kills + participant.assists / (participant.deaths || 1)).toFixed(2)} KD/A)</div>
-            <div className="grid grid-cols-4 grid-rows-2 items-center gap-1 mt-2">
-              {generateItem(0, participant.item0)}
-              {generateItem(1, participant.item1)}
-              {generateItem(2, participant.item2)}
-              <span className="row-span-2">{generateItem(6, participant.item6)}</span>
-              {generateItem(3, participant.item3)}
-              {generateItem(4, participant.item4)}
-              {generateItem(5, participant.item5)}
-            </div>
+        <div className="my-1 border win:border-nord14/80 loss:border-nord11/80">{/* content border/bg */}
+          <div className="flex w-full win:bg-nord14/80 loss:bg-nord11/80">
+            <div>Game Time</div>
+            <div className="absolute w-screen">Patch</div>
+            <div></div>
           </div>
-          <div className="mx-2 mb-3 relative"> {/* Champion Icon and spells */}
-            <img alt="champion" className="w-[160px] h-[160px] rounded-full" src={`http://ddragon.leagueoflegends.com/cdn/${process.env.NEXT_PUBLIC_CURRENT_PATCH}/img/champion/${participant.championName}.png`} />
-            <div className="flex absolute -bottom-1 -left-1 items-end">
-              <div className="flex items-center justify-center text-3xl font-medium w-12 h-12 rounded-full bg-nord6">{participant.champLevel}</div>
-              <img alt="summoner spell 1" className="w-9 h-9" src={`http://ddragon.leagueoflegends.com/cdn/${process.env.NEXT_PUBLIC_CURRENT_PATCH}/img/spell/${RiotSummonerSpellMapping[participant.summoner1Id]}.png`} />
-              <img alt="summoner spell 2" className="w-9 h-9" src={`http://ddragon.leagueoflegends.com/cdn/${process.env.NEXT_PUBLIC_CURRENT_PATCH}/img/spell/${RiotSummonerSpellMapping[participant.summoner2Id]}.png`} />
-              <div className="flex">
-                <div className="flex items-center justify-center w-12 h-12 rounded-full bg-nord6 relative">
-                  <img alt="keystone mastery" className="w-10 h-10" src={`https://ddragon.leagueoflegends.com/cdn/img/${keystoneIcon}`} />
-                </div>
-                <div className="flex items-center justify-center w-7 h-7 rounded-full absolute -bottom-0.5 -right-1 bg-nord4">
-                  <img alt="secondary mastery" className="w-5 h-5" src={`https://ddragon.leagueoflegends.com/cdn/img/${secondaryIcon}`} />
+          <div className="flex items-center pt-2 pb-1">
+            <div className="flex flex-col items-center w-[175px]">{/* Result and items */}
+              <div className=" text-xl px-2 py-1 mb-1 win:bg-nord14/50 loss:bg-nord11/50">{team.win ? "Victory" : "Defeat"}</div>
+              <div>{participant.totalMinionsKilled} CS ({(participant.totalMinionsKilled / (match.info.gameDuration / 60)).toFixed(2)} CS/M)</div>
+              <div>{participant.kills}/{participant.deaths}/{participant.assists} ({(participant.kills + participant.assists / (participant.deaths || 1)).toFixed(2)} KD/A)</div>
+              <div className="grid grid-cols-4 grid-rows-2 items-center gap-1 mt-2">
+                {generateItem(0, participant.item0)}
+                {generateItem(1, participant.item1)}
+                {generateItem(2, participant.item2)}
+                <span className="row-span-2">{generateItem(6, participant.item6)}</span>
+                {generateItem(3, participant.item3)}
+                {generateItem(4, participant.item4)}
+                {generateItem(5, participant.item5)}
+              </div>
+            </div>
+            <div className="mx-2 mb-3 relative"> {/* Champion Icon and spells */}
+              <img alt="champion" className="w-[160px] h-[160px] rounded-full" src={`http://ddragon.leagueoflegends.com/cdn/${process.env.NEXT_PUBLIC_CURRENT_PATCH}/img/champion/${participant.championName}.png`} />
+              <div className="flex absolute -bottom-1 -left-1 items-end">
+                <div className="flex items-center justify-center text-3xl font-medium w-12 h-12 rounded-full bg-nord6">{participant.champLevel}</div>
+                <img alt="summoner spell 1" className="w-9 h-9" src={`http://ddragon.leagueoflegends.com/cdn/${process.env.NEXT_PUBLIC_CURRENT_PATCH}/img/spell/${RiotSummonerSpellMapping[participant.summoner1Id]}.png`} />
+                <img alt="summoner spell 2" className="w-9 h-9" src={`http://ddragon.leagueoflegends.com/cdn/${process.env.NEXT_PUBLIC_CURRENT_PATCH}/img/spell/${RiotSummonerSpellMapping[participant.summoner2Id]}.png`} />
+                <div className="flex">
+                  <div className="flex items-center justify-center w-12 h-12 rounded-full bg-nord6 relative">
+                    <img alt="keystone mastery" className="w-10 h-10" src={`https://ddragon.leagueoflegends.com/cdn/img/${keystoneIcon}`} />
+                  </div>
+                  <div className="flex items-center justify-center w-7 h-7 rounded-full absolute -bottom-0.5 -right-1 bg-nord4">
+                    <img alt="secondary mastery" className="w-5 h-5" src={`https://ddragon.leagueoflegends.com/cdn/img/${secondaryIcon}`} />
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div className="grid grid-cols-9 grid-rows-team-info gap-x-1 w-[250px]"> {/* Team information */}
-            {teamInfo.map(i => {
-              if (i) {
-                return (
-                  <div className="flex flex-col bg-nord5 items-center mb-1">
-                    <img alt={i.alt} className="h-5 w-5" src={i.src} />
-                    <div>{i.kills}</div>
-                  </div>
-                )
-              } else {
-                return <div>{/* empty div for middle space */}</div>
-              }
-            })}
-            {generateTeamInfoRow(match, TeamPosition.TOP)}
-            {generateTeamInfoRow(match, TeamPosition.JUNGLE)}
-            {generateTeamInfoRow(match, TeamPosition.MIDDLE)}
-            {generateTeamInfoRow(match, TeamPosition.BOTTOM)}
-            {generateTeamInfoRow(match, TeamPosition.UTILITY)}
+            <div className="grid grid-cols-9 grid-rows-team-info gap-x-1 w-[250px]"> {/* Team information */}
+              {teamInfo.map(i => {
+                if (i) {
+                  return (
+                    <div className="flex flex-col bg-nord5 items-center mb-1">
+                      <img alt={i.alt} className="h-5 w-5" src={i.src} />
+                      <div>{i.kills}</div>
+                    </div>
+                  )
+                } else {
+                  return <div>{/* empty div for middle space */}</div>
+                }
+              })}
+              {generateTeamInfoRow(match, TeamPosition.TOP)}
+              {generateTeamInfoRow(match, TeamPosition.JUNGLE)}
+              {generateTeamInfoRow(match, TeamPosition.MIDDLE)}
+              {generateTeamInfoRow(match, TeamPosition.BOTTOM)}
+              {generateTeamInfoRow(match, TeamPosition.UTILITY)}
+            </div>
           </div>
         </div>
       </div>

@@ -7,7 +7,6 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import Divider from '@mui/material/Divider';
 import InputBase from '@mui/material/InputBase';
-import { Paper } from '@mui/material';
 
 const SearchHeader: React.FC = () => {
   const router = useRouter();
