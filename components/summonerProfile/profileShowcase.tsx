@@ -9,7 +9,7 @@ interface ProfileShowcaseProps {
 
 const ProfileShowcase: React.FC<ProfileShowcaseProps> = ({ summonerName }: ProfileShowcaseProps) => {
   return (
-    <div className="flex justify-between m-2">
+    <div className="flex justify-between mx-3 mt-2">
       <ChampionMasteryShowcase summonerName={summonerName} useHighest />
       <MasteryPointShowcase summonerName={summonerName} />
       <RankedShowcase summonerName={summonerName} queueType={RiotQueueType.RANKED_SOLO} />

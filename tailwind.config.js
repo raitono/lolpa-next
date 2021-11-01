@@ -1,4 +1,7 @@
+const { themeVariants } = require('tailwindcss-theme-variants');
+
 module.exports = {
+  mode: 'jit',
   purge: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
   darkMode: 'class', // or 'media' or 'class'
   theme: {
@@ -17,12 +20,29 @@ module.exports = {
         oxford: '#0A1931',
         flickr: '#185ADB',
         jonquil: '#F8CF40',
-        alabaster: '#E1E8DF'
+        alabaster: '#E1E8DF',
       },
+      gridTemplateRows: {
+        'team-info': 'minmax(0, 2fr) repeat(5, minmax(0, 1fr))'
+      }
     },
   },
   variants: {
     extend: {},
   },
-  plugins: [],
+  plugins: [
+    themeVariants({
+      group: 'matches',
+      baseSelector: '',
+      themes: {
+        win: {
+          selector: '[data-match-win=true]',
+        },
+        loss: {
+          selector: '[data-match-win=false]',
+        },
+      },
+    }),
+    require('tailwind-nord'),
+  ],
 }
