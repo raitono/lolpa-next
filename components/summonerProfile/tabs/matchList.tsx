@@ -22,6 +22,13 @@ enum TeamPosition {
   "BLANK" = "",
 }
 
+const GameQueues = [
+  {
+    queueId: 420,
+    queueName: "Ranked Solo"
+  }
+]
+
 let usedBlankParticipants: { matchId: string, participantId: number }[] = [];
 
 const MatchList: React.FC<MatchListProps> = ({ summonerName }: MatchListProps) => {
@@ -76,6 +83,7 @@ const MatchSummary: React.FC<MatchSummaryProps> = ({ summonerName, match, runes 
   const keystoneId = primaryStyle?.selections[0].perk;
   const keystoneIcon = runes.find(r => r.id === primaryStyle?.style)?.slots[0].runes.find(r => r.id === keystoneId)?.icon;
   const secondaryIcon = runes.find(r => r.id === participant.perks.styles.find(s => s.description === "subStyle")?.style)?.icon;
+
   const blueTeam = match.info.teams.find(t => t.teamId === 100)!;
   const redTeam = match.info.teams.find(t => t.teamId === 200)!;
 
@@ -122,15 +130,17 @@ const MatchSummary: React.FC<MatchSummaryProps> = ({ summonerName, match, runes 
       kills: redTeam.objectives.inhibitor.kills
     },
   ];
+  const gameTime = new Date();
+  gameTime.setUTCHours(0, 0, match.info.gameDuration, 0);
 
   return (
     <>
       <div data-match-win={team.win}>{/* theme div */}
         <div className="my-1 border win:border-nord14/80 loss:border-nord11/80">{/* content border/bg */}
-          <div className="flex w-full win:bg-nord14/80 loss:bg-nord11/80">
-            <div>Game Time</div>
-            <div className="absolute w-screen">Patch</div>
-            <div></div>
+          <div className="grid grid-cols-3 justify-items-center w-full win:bg-nord14/80 loss:bg-nord11/80">
+            <div>{`${gameTime.toISOString().substr(11, 8)}`}</div>
+            <div>{match.info.gameVersion.split('.', 2).join('.')}</div>
+            <div>{GameQueues.find(q => q.queueId === match.info.queueId)?.queueName}</div>
           </div>
           <div className="flex items-center pt-2 pb-1">
             <div className="flex flex-col items-center w-[175px]">{/* Result and items */}
