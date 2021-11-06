@@ -22,8 +22,8 @@ const ProfileHeader: React.FC<ProfileHeaderProps> = ({ summonerName, summonerLev
         </div>
         <div className="text-7xl text-center text-on-background-default pb-2">{summonerName}</div>
         <span className=" flex            absolute  text-7xl                    w-min
-                          items-center    top-2     text-on-background-default  rounded-full
-                          justify-center  right-2   bg-foreground-default" onClick={() => { location.reload() }}>
+                          items-center    top-4     text-on-background-default  rounded-full
+                          justify-center  right-4   bg-foreground-default" onClick={() => { location.reload() }}>
           <RefreshIcon fontSize="inherit" color="inherit" />
         </span>
       </div>

@@ -39,7 +39,7 @@ const SearchHeader: React.FC = () => {
         </div>
       </div>
       <div className='absolute w-screen flex justify-center'>
-        <form className='flex rounded-md bg-foreground-default bg-opacity-10 hover:bg-opacity-25' onSubmit={handleSubmit}>
+        <form className='flex rounded-md bg-on-background-default' onSubmit={handleSubmit}>
           <InputBase id='search' className='ml-3' placeholder='Search...' type="search" onChange={handleSearchChange} />
           <button type="submit" />
           <Divider orientation='vertical' variant='middle' flexItem />
