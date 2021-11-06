@@ -5,7 +5,7 @@ import { ISummoner } from '../../models/summoner';
 import ProfileHeader from "../../components/summonerProfile/profileHeader";
 import SearchHeader from '../../components/searchHeader';
 import ProfileShowcase from '../../components/summonerProfile/profileShowcase';
-import ProfileTabs from '../../components/summonerProfile/profileTabs';
+import MatchList from '../../components/summonerProfile/tabs/matchList';
 
 export default function SummonerProfile() {
   const router = useRouter();
@@ -22,11 +22,11 @@ export default function SummonerProfile() {
 
   if (name && summoner)
     return (
-      <div className="bg-background-default h-screen">
+      <div className="bg-background-default h-full">
         <SearchHeader />
         <ProfileHeader summonerName={summoner.name} summonerLevel={summoner.summonerLevel} profileIconId={summoner.profileIconId} ></ProfileHeader>
         <ProfileShowcase summonerName={summoner.name} />
-        <ProfileTabs summonerName={summoner.name} />
+        <MatchList summonerName={summoner.name} />
       </div>
     );
   else

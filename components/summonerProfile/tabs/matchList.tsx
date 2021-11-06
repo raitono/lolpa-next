@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Link from 'next/link';
 import { MatchV5DTOs } from "twisted/dist/models-dto";
 import RiotRunesDto from "../../../models/riot/riotRunesDto";
 import RiotSummonerSpellMapping from "../../../models/riot/riotSummonerSpellMapping";
@@ -52,9 +53,9 @@ const MatchList: React.FC<MatchListProps> = ({ summonerName }: MatchListProps) =
   if (matches && runes) {
     if (matches.length) {
       return (
-        <>
+        <div className="container px-3 mt-4">
           {matches.map(m => <MatchSummary key={m.metadata.matchId} match={m} summonerName={summonerName} runes={runes} />)}
-        </>
+        </div>
       );
     } else {
       return <div className="text-center font-bold text-3xl">No matches found for {summonerName}</div>
@@ -134,68 +135,66 @@ const MatchSummary: React.FC<MatchSummaryProps> = ({ summonerName, match, runes 
   gameTime.setUTCHours(0, 0, match.info.gameDuration, 0);
 
   return (
-    <>
-      <div className="match" data-win={team.win}>{/* theme div */}
-        <div className="my-1 bg-background-default text-on-background-default border win:border-success-default loss:border-error-default">{/* content border/bg */}
-          <div className="grid grid-cols-3 justify-items-center w-full win:bg-success-default loss:bg-error-default">
-            <div>{`${gameTime.toISOString().substr(11, 8)}`}</div>
-            <div>{match.info.gameVersion.split('.', 2).join('.')}</div>
-            <div>{GameQueues.find(q => q.queueId === match.info.queueId)?.queueName}</div>
-          </div>
-          <div className="flex items-center pt-2 pb-1">
-            <div className="flex flex-col items-center w-[175px]">{/* Result and items */}
-              <div className=" text-xl px-2 py-1 mb-1 win:bg-success-default loss:bg-error-default">{team.win ? "Victory" : "Defeat"}</div>
-              <div>{participant.totalMinionsKilled} CS ({(participant.totalMinionsKilled / (match.info.gameDuration / 60)).toFixed(2)} CS/M)</div>
-              <div>{participant.kills}/{participant.deaths}/{participant.assists} ({(participant.kills + participant.assists / (participant.deaths || 1)).toFixed(2)} KD/A)</div>
-              <div className="grid grid-cols-4 grid-rows-2 items-center gap-1 mt-2">
-                {generateItem(0, participant.item0)}
-                {generateItem(1, participant.item1)}
-                {generateItem(2, participant.item2)}
-                <span className="row-span-2">{generateItem(6, participant.item6)}</span>
-                {generateItem(3, participant.item3)}
-                {generateItem(4, participant.item4)}
-                {generateItem(5, participant.item5)}
-              </div>
+    <div className="match" data-win={team.win}>{/* theme div */}
+      <div className="my-1 bg-background-default text-on-background-default border win:border-success-default loss:border-error-default">{/* content border/bg */}
+        <div className="grid grid-cols-3 justify-items-center w-full win:bg-success-default loss:bg-error-default">
+          <div>{`${gameTime.toISOString().substr(11, 8)}`}</div>
+          <div>{match.info.gameVersion.split('.', 2).join('.')}</div>
+          <div>{GameQueues.find(q => q.queueId === match.info.queueId)?.queueName}</div>
+        </div>
+        <div className="flex items-center pt-2 pb-1">
+          <div className="flex flex-col items-center w-[175px]">{/* Result and items */}
+            <div className=" text-xl px-2 py-1 mb-1 win:bg-success-default loss:bg-error-default">{team.win ? "Victory" : "Defeat"}</div>
+            <div>{participant.totalMinionsKilled} CS ({(participant.totalMinionsKilled / (match.info.gameDuration / 60)).toFixed(2)} CS/M)</div>
+            <div>{participant.kills}/{participant.deaths}/{participant.assists} ({(participant.kills + participant.assists / (participant.deaths || 1)).toFixed(2)} KD/A)</div>
+            <div className="grid grid-cols-4 grid-rows-2 items-center gap-1 mt-2">
+              {generateItem(0, participant.item0)}
+              {generateItem(1, participant.item1)}
+              {generateItem(2, participant.item2)}
+              <span className="row-span-2">{generateItem(6, participant.item6)}</span>
+              {generateItem(3, participant.item3)}
+              {generateItem(4, participant.item4)}
+              {generateItem(5, participant.item5)}
             </div>
-            <div className="mx-2 mb-3 relative"> {/* Champion Icon and spells */}
-              <img alt="champion" className="w-[160px] h-[160px] rounded-full" src={`http://ddragon.leagueoflegends.com/cdn/${process.env.NEXT_PUBLIC_CURRENT_PATCH}/img/champion/${participant.championName}.png`} />
-              <div className="flex absolute -bottom-1 -left-1 items-end">
-                <div className="flex items-center justify-center text-3xl font-medium w-12 h-11 rounded-full bg-foreground-default">{participant.champLevel}</div>
-                <img alt="summoner spell 1" className="w-9 h-9" src={`http://ddragon.leagueoflegends.com/cdn/${process.env.NEXT_PUBLIC_CURRENT_PATCH}/img/spell/${RiotSummonerSpellMapping[participant.summoner1Id]}.png`} />
-                <img alt="summoner spell 2" className="w-9 h-9" src={`http://ddragon.leagueoflegends.com/cdn/${process.env.NEXT_PUBLIC_CURRENT_PATCH}/img/spell/${RiotSummonerSpellMapping[participant.summoner2Id]}.png`} />
-                <div className="flex">
-                  <div className="flex items-center justify-center w-12 h-12 rounded-full bg-foreground-default relative">
-                    <img alt="keystone mastery" className="w-10 h-10" src={`https://ddragon.leagueoflegends.com/cdn/img/${keystoneIcon}`} />
-                  </div>
-                  <div className="flex items-center justify-center w-7 h-7 rounded-full absolute -bottom-0.5 -right-1 bg-on-foreground-default">
-                    <img alt="secondary mastery" className="w-5 h-5" src={`https://ddragon.leagueoflegends.com/cdn/img/${secondaryIcon}`} />
-                  </div>
+          </div>
+          <div className="mx-2 mb-3 relative"> {/* Champion Icon and spells */}
+            <img alt="champion" className="w-[160px] h-[160px] rounded-full" src={`http://ddragon.leagueoflegends.com/cdn/${process.env.NEXT_PUBLIC_CURRENT_PATCH}/img/champion/${participant.championName}.png`} />
+            <div className="flex absolute -bottom-1 -left-1 items-end">
+              <div className="flex items-center justify-center text-3xl font-medium w-12 h-11 rounded-full bg-foreground-default">{participant.champLevel}</div>
+              <img alt="summoner spell 1" className="w-9 h-9" src={`http://ddragon.leagueoflegends.com/cdn/${process.env.NEXT_PUBLIC_CURRENT_PATCH}/img/spell/${RiotSummonerSpellMapping[participant.summoner1Id]}.png`} />
+              <img alt="summoner spell 2" className="w-9 h-9" src={`http://ddragon.leagueoflegends.com/cdn/${process.env.NEXT_PUBLIC_CURRENT_PATCH}/img/spell/${RiotSummonerSpellMapping[participant.summoner2Id]}.png`} />
+              <div className="flex">
+                <div className="flex items-center justify-center w-12 h-12 rounded-full bg-foreground-default relative">
+                  <img alt="keystone mastery" className="w-10 h-10" src={`https://ddragon.leagueoflegends.com/cdn/img/${keystoneIcon}`} />
+                </div>
+                <div className="flex items-center justify-center w-7 h-7 rounded-full absolute -bottom-0.5 -right-1 bg-on-foreground-default">
+                  <img alt="secondary mastery" className="w-5 h-5" src={`https://ddragon.leagueoflegends.com/cdn/img/${secondaryIcon}`} />
                 </div>
               </div>
             </div>
-            <div className="grid grid-cols-9 grid-rows-team-info gap-x-1 w-[250px]"> {/* Team information */}
-              {teamInfo.map(i => {
-                if (i) {
-                  return (
-                    <div className="flex flex-col  bg-foreground-default items-center mb-1">
-                      <img alt={i.alt} className="mt-1 h-5 w-5" src={i.src} />
-                      <div>{i.kills}</div>
-                    </div>
-                  )
-                } else {
-                  return <div>{/* empty div for middle space */}</div>
-                }
-              })}
-              {generateTeamInfoRow(match, TeamPosition.TOP)}
-              {generateTeamInfoRow(match, TeamPosition.JUNGLE)}
-              {generateTeamInfoRow(match, TeamPosition.MIDDLE)}
-              {generateTeamInfoRow(match, TeamPosition.BOTTOM)}
-              {generateTeamInfoRow(match, TeamPosition.UTILITY)}
-            </div>
+          </div>
+          <div className="grid grid-cols-9 grid-rows-team-info gap-x-1 w-[250px]"> {/* Team information */}
+            {teamInfo.map(i => {
+              if (i) {
+                return (
+                  <div className="flex flex-col  bg-foreground-default items-center mb-1">
+                    <img alt={i.alt} className="mt-1 h-5 w-5" src={i.src} />
+                    <div>{i.kills}</div>
+                  </div>
+                )
+              } else {
+                return <div>{/* empty div for middle space */}</div>
+              }
+            })}
+            {generateTeamInfoRow(match, TeamPosition.TOP)}
+            {generateTeamInfoRow(match, TeamPosition.JUNGLE)}
+            {generateTeamInfoRow(match, TeamPosition.MIDDLE)}
+            {generateTeamInfoRow(match, TeamPosition.BOTTOM)}
+            {generateTeamInfoRow(match, TeamPosition.UTILITY)}
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
@@ -213,11 +212,11 @@ const generateTeamInfoRow = (match: MatchV5DTOs.MatchDto, position: TeamPosition
 
   return (
     <>
-      <div className="col-span-3 pl-1 truncate bg-foreground-default">{blueSide?.summonerName}</div>
+      <Link href={`/summoner/${blueSide?.summonerName}`}><a className="col-span-3 pl-1 truncate bg-foreground-default">{blueSide?.summonerName}</a></Link>
       <span className="flex justify-center"><img alt={`${blueSide?.teamPosition} champion`} className="w-6 h-6 rounded-full" src={`http://ddragon.leagueoflegends.com/cdn/${process.env.NEXT_PUBLIC_CURRENT_PATCH}/img/champion/${blueSide?.championName}.png`} /></span>
       <span className="flex justify-center"><img alt={`${blueSide?.teamPosition} lane`} className="w-6 h-6 rounded-full bg-foreground-default" src={`/positions/${blueSide?.teamPosition}.png`} /></span>
       <span className="flex justify-center"><img alt={`${redSide?.teamPosition} champion`} className="w-6 h-6 rounded-full" src={`http://ddragon.leagueoflegends.com/cdn/${process.env.NEXT_PUBLIC_CURRENT_PATCH}/img/champion/${redSide?.championName}.png`} /></span>
-      <div className="col-span-3 pl-1 truncate bg-foreground-default">{redSide?.summonerName}</div>
+      <Link href={`/summoner/${redSide?.summonerName}`}><a className="col-span-3 pl-1 truncate bg-foreground-default">{redSide?.summonerName}</a></Link>
     </>
   )
 };

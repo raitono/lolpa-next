@@ -10,12 +10,12 @@ interface ProfileTabContents {
 }
 
 const ProfileTabs: React.FC<ProfileTabsProps> = ({ summonerName }: ProfileTabsProps) => {
-  const [selectedTab, setSelectedTab] = useState("matches");
+  const [selectedTab, setSelectedTab] = useState("lp");
 
   const tabs: ProfileTabContents = {
     "lp": <div>LP Graph</div>,
     "matches": <MatchList summonerName={summonerName} />,
-    "tab3": <div>Tab 3</div>
+    // "tab3": <div>Tab 3</div>
   };
 
   const handleTabClick = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -38,10 +38,10 @@ const ProfileTabs: React.FC<ProfileTabsProps> = ({ summonerName }: ProfileTabsPr
       <div className="p-3 text-3xl">
         <ul className="list-reset flex justify-center">
           <li className="mr-1">
-            <button id="lp" onClick={handleTabClick} className="tab inline-block py-1 m-1 px-2 font-semibold text-background-default bg-attention-primary-default rounded-md border-4 border-background-default">LP Graphs</button>
+            <button id="lp" onClick={handleTabClick} className="tab inline-block py-1 m-1 px-2 font-semibold text-background-default bg-attention-primary-default rounded-md border-4 border-uncommon-default active">LP Graphs</button>
           </li>
           <li className="mr-1">
-            <button id="matches" onClick={handleTabClick} className="tab inline-block py-1 m-1 px-2 font-semibold text-background-default bg-attention-primary-default rounded-md border-4 border-uncommon-default active">Matches</button>
+            <button id="matches" onClick={handleTabClick} className="tab inline-block py-1 m-1 px-2 font-semibold text-background-default bg-attention-primary-default rounded-md border-4 border-background-default">Matches</button>
           </li>
           {/* <li className="mr-1">
             <button id="tab3" onClick={handleTabClick} className="tab inline-block py-1 m-1 px-2 font-semibold bg-on-background-muted rounded-md">Tab 3</button>
