@@ -24,6 +24,7 @@
     "tailwind-nord": "^1.2.0",
     "tailwindcss": "^2.2.17",
     "tailwindcss-theme-variants": "^2.0.0-alpha.2",
+    "tailwindcss-theming": "^3.0.0-beta.1",
     "typescript": "^4.3.2"
   }
 }

@@ -25,7 +25,7 @@ const RankedShowcase: React.FC<RankedShowcaseProps> = ({ summonerName, queueType
 
   return (
     <>
-      <img className="w-200px h-200px bg-nord5" alt="ranked emblam" src={`/ranked-emblems/${rank}.png`} />
+      <img className="w-[200px] h-[200px] bg-foreground-default" alt="ranked emblam" src={`/ranked-emblems/${rank}.png`} />
     </>
   );
 }

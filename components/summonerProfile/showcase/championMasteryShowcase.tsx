@@ -37,9 +37,9 @@ const ChampionMasteryShowcase: React.FC<ChampionMasteryShowcaseProps> = ({ champ
     return (
       <>
         <div className="relative">
-          <img className="w-200px h-200px" alt={champion} src={`http://ddragon.leagueoflegends.com/cdn/${process.env.NEXT_PUBLIC_CURRENT_PATCH}/img/champion/${champion}.png`} />
+          <img className="w-[200px] h-[200px]" alt={champion} src={`http://ddragon.leagueoflegends.com/cdn/${process.env.NEXT_PUBLIC_CURRENT_PATCH}/img/champion/${champion}.png`} />
           <img className="absolute w-16 top-0 left-0" alt="Mastery Badge" src={`/champion-mastery/${masteryData.championLevel}.png`} />
-          <span className="absolute bottom-1 left-1/2 transform -translate-x-1/2 text-alabaster text-5xl font-medium" style={{ "WebkitTextStroke": "2px black" }}>{masteryData.championPoints.toLocaleString()}</span>
+          <span className="absolute bottom-1 left-1/2 transform -translate-x-1/2 text-alabaster text-5xl font-medium text-outline-white">{masteryData.championPoints.toLocaleString()}</span>
         </div>
       </>
     );

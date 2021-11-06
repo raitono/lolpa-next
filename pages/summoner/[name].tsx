@@ -22,12 +22,12 @@ export default function SummonerProfile() {
 
   if (name && summoner)
     return (
-      <>
+      <div className="bg-background-default h-screen">
         <SearchHeader />
         <ProfileHeader summonerName={summoner.name} summonerLevel={summoner.summonerLevel} profileIconId={summoner.profileIconId} ></ProfileHeader>
         <ProfileShowcase summonerName={summoner.name} />
         <ProfileTabs summonerName={summoner.name} />
-      </>
+      </div>
     );
   else
     return (<div>Summoner not found</div>);

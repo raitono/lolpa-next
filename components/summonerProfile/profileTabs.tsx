@@ -23,10 +23,12 @@ const ProfileTabs: React.FC<ProfileTabsProps> = ({ summonerName }: ProfileTabsPr
     const tab: HTMLButtonElement = e.target as HTMLButtonElement;
     const activeTab: HTMLButtonElement | null = document.querySelector(".tab.active");
     if (activeTab) {
-      activeTab.classList.remove("active");
+      activeTab.classList.remove("active", "border-uncommon-default");
+      activeTab.classList.add("border-background-default");
     }
 
-    tab.classList.add("active");
+    tab.classList.remove("border-background-default");
+    tab.classList.add("active", "border-uncommon-default");
 
     setSelectedTab(tab.id);
   };
@@ -36,14 +38,14 @@ const ProfileTabs: React.FC<ProfileTabsProps> = ({ summonerName }: ProfileTabsPr
       <div className="p-3 text-3xl">
         <ul className="list-reset flex justify-center">
           <li className="mr-1">
-            <button id="lp" onClick={handleTabClick} className="tab inline-block py-2 px-4 text-blue-400 font-semibold">LP Graphs</button>
+            <button id="lp" onClick={handleTabClick} className="tab inline-block py-1 m-1 px-2 font-semibold text-background-default bg-attention-primary-default rounded-md border-4 border-background-default">LP Graphs</button>
           </li>
           <li className="mr-1">
-            <button id="matches" onClick={handleTabClick} className="tab inline-block py-2 px-4 font-semibold active">Matches</button>
+            <button id="matches" onClick={handleTabClick} className="tab inline-block py-1 m-1 px-2 font-semibold text-background-default bg-attention-primary-default rounded-md border-4 border-uncommon-default active">Matches</button>
           </li>
-          <li className="mr-1">
-            <button id="tab3" onClick={handleTabClick} className="tab inline-block py-2 px-4 text-blue-400 font-semibold">Tab 3</button>
-          </li>
+          {/* <li className="mr-1">
+            <button id="tab3" onClick={handleTabClick} className="tab inline-block py-1 m-1 px-2 font-semibold bg-on-background-muted rounded-md">Tab 3</button>
+          </li> */}
         </ul>
       </div>
       <div className="container px-3">
