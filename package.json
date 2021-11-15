@@ -8,16 +8,25 @@
     "start": "next start"
   },
   "dependencies": {
+    "@babel/core": "^7.16.0",
+    "@babel/plugin-proposal-decorators": "^7.16.0",
+    "@babel/plugin-proposal-private-methods": "^7.16.0",
+    "@babel/plugin-proposal-private-property-in-object": "^7.16.0",
     "@emotion/react": "^11.5.0",
     "@emotion/styled": "^11.3.0",
     "@mui/icons-material": "^5.0.4",
     "@mui/material": "^5.0.4",
+    "babel-plugin-transform-typescript-metadata": "^0.3.2",
+    "mysql2": "^2.3.3-rc.0",
     "next": "^11.1.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "twisted": "^1.44.3"
+    "reflect-metadata": "^0.1.13",
+    "twisted": "^1.44.3",
+    "typeorm": "^0.2.40"
   },
   "devDependencies": {
+    "@types/node": "^16.11.7",
     "@types/react": "^17.0.8",
     "autoprefixer": "^10.3.7",
     "postcss": "^8.3.9",
