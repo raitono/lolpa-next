@@ -142,8 +142,8 @@ const MatchSummary: React.FC<MatchSummaryProps> = ({ summonerName, match, runes 
           <div>{match.info.gameVersion.split('.', 2).join('.')}</div>
           <div>{GameQueues.find(q => q.queueId === match.info.queueId)?.queueName}</div>
         </div>
-        <div className="flex items-center pt-2 pb-1">
-          <div className="flex flex-col items-center w-[175px]">{/* Result and items */}
+        <div className="flex justify-between p-2">
+          <div className="flex-shrink-0 flex flex-col items-center">{/* Result and items */}
             <div className=" text-xl px-2 py-1 mb-1 win:bg-success-default loss:bg-error-default">{team.win ? "Victory" : "Defeat"}</div>
             <div>{participant.totalMinionsKilled} CS ({(participant.totalMinionsKilled / (match.info.gameDuration / 60)).toFixed(2)} CS/M)</div>
             <div>{participant.kills}/{participant.deaths}/{participant.assists} ({(participant.kills + participant.assists / (participant.deaths || 1)).toFixed(2)} KD/A)</div>
@@ -157,7 +157,7 @@ const MatchSummary: React.FC<MatchSummaryProps> = ({ summonerName, match, runes 
               {generateItem(5, participant.item5)}
             </div>
           </div>
-          <div className="mx-2 mb-3 relative"> {/* Champion Icon and spells */}
+          <div className="flex-shrink-0 mx-2 mb-3 relative"> {/* Champion Icon and spells */}
             <img alt="champion" className="w-[160px] h-[160px] rounded-full border-2 border-on-background-muted" src={`http://ddragon.leagueoflegends.com/cdn/${process.env.NEXT_PUBLIC_CURRENT_PATCH}/img/champion/${participant.championName}.png`} />
             <div className="flex absolute -bottom-1 -left-1 items-end">
               <div className="flex items-center justify-center text-3xl font-medium w-12 h-11 rounded-full bg-foreground-default border-2 border-on-background-muted">{participant.champLevel}</div>
@@ -173,7 +173,7 @@ const MatchSummary: React.FC<MatchSummaryProps> = ({ summonerName, match, runes 
               </div>
             </div>
           </div>
-          <div className="grid grid-cols-9 grid-rows-team-info gap-x-1 w-[250px]"> {/* Team information */}
+          <div className="flex-shrink max-w-[300px] grid grid-cols-9 grid-rows-team-info gap-x-1"> {/* Team information */}
             {teamInfo.map(i => {
               if (i) {
                 return (
@@ -200,9 +200,9 @@ const MatchSummary: React.FC<MatchSummaryProps> = ({ summonerName, match, runes 
 
 const generateItem = (itemIndex: number, itemId: number) => {
   if (itemId) {
-    return <img alt={`item ${itemIndex}`} className="w-9 h-9 rounded-lg" src={`http://ddragon.leagueoflegends.com/cdn/${process.env.NEXT_PUBLIC_CURRENT_PATCH}/img/item/${itemId}.png`} />
+    return <img alt={`item ${itemIndex}`} className="w-9 h-9 rounded-lg border border-on-background-muted" src={`http://ddragon.leagueoflegends.com/cdn/${process.env.NEXT_PUBLIC_CURRENT_PATCH}/img/item/${itemId}.png`} />
   } else {
-    return <div className="w-9 h-9 rounded-lg bg-on-background-muted"></div>
+    return <div className="w-9 h-9 rounded-lg bg-foreground-default border border-on-background-muted"></div>
   }
 };
 
