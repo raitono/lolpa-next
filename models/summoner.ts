@@ -1,6 +1,9 @@
 export interface ISummoner {
-  puuid: string;
-  name: string;
-  summonerLevel: number;
+  accountId: string;
   profileIconId: number;
+  revisionDate: number;
+  name: string;
+  id: string;
+  puuid: string;
+  summonerLevel: number;
 }

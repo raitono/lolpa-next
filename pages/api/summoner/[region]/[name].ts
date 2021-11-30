@@ -19,7 +19,7 @@ export default async (req: NextApiRequest, res: NextApiResponse<ISummoner>) => {
     let { name } = req.query;
     name = Array.isArray(name) ? name[0] : name;
 
-    const conn = await createConnection([SummonerEntity]);
+    const conn = await createConnection();
     const summonerRepo = conn.getRepository(SummonerEntity);
     let summoner: ISummoner | undefined = await summonerRepo.findOne({ name });
 

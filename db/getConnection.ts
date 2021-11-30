@@ -1,8 +1,9 @@
 import { Connection, createConnection, getConnection } from "typeorm";
+import { AllEntities } from "./entity";
 
 let connectionReadyPromise: Promise<Connection> | null = null;
 
-const prepareConnection = (entities: Function[]): Promise<Connection> => {
+const prepareConnection = (): Promise<Connection> => {
   if (!connectionReadyPromise) {
     connectionReadyPromise = (async () => {
       // clean up old connection that references outdated hot-reload classes
@@ -15,7 +16,7 @@ const prepareConnection = (entities: Function[]): Promise<Connection> => {
 
       // wait for new default connection
       let ormconfig = require('../ormconfig');
-      ormconfig.entities = entities;
+      ormconfig.entities = AllEntities;
       return createConnection(ormconfig);
     })();
   }

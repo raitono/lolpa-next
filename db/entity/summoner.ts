@@ -5,38 +5,17 @@ export class Summoner extends BaseEntity {
   @PrimaryGeneratedColumn()
   public internalId?: number;
   @Column()
-  public puuid: string;
+  public puuid!: string;
   @Column()
-  public accountId: string;
+  public accountId!: string;
   @Column()
-  public profileIconId: number;
+  public profileIconId!: number;
   @Column("bigint")
-  public revisionDate: number;
+  public revisionDate!: number;
   @Column()
-  public name: string;
+  public name!: string;
   @Column()
-  public id: string;
+  public id!: string;
   @Column()
-  public summonerLevel: number;
-
-  constructor(
-    accountId: string,
-    profileIconId: number,
-    revisionDate: number,
-    name: string,
-    id: string,
-    puuid: string,
-    summonerLevel: number,
-    internalId?: number
-  ) {
-    super();
-    this.internalId = internalId;
-    this.accountId = accountId;
-    this.profileIconId = profileIconId;
-    this.revisionDate = revisionDate;
-    this.name = name;
-    this.id = id;
-    this.puuid = puuid;
-    this.summonerLevel = summonerLevel;
-  }
+  public summonerLevel!: number;
 }

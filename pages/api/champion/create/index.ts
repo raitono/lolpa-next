@@ -7,8 +7,12 @@ export default async (req: NextApiRequest, res: NextApiResponse<IChampion>) => {
   if (method === 'POST') {
     try {
       res.status(201).json(body);
-    } catch (error) {
-      res.status(500).end(error.message);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        res.status(500).end(error.message);
+      } else {
+        res.status(500).end('Unknown server error');
+      }
     }
   } else {
     res.setHeader('Allow', ['POST']);
