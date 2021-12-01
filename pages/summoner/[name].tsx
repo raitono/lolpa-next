@@ -15,12 +15,12 @@ export default function SummonerProfile() {
   useEffect(() => {
     if (name) {
       fetch(`${process.env.NEXT_PUBLIC_BASE_API_URL}/summoner/NA1/${name}`)
-        .then(response => response.json())
+        .then(res => res.ok ? res.json() : undefined)
         .then(setSummoner);
     }
   }, [name]);
 
-  if (name && summoner)
+  if (name && summoner) {
     return (
       <div className="bg-background-default h-full">
         <SearchHeader />
@@ -31,6 +31,15 @@ export default function SummonerProfile() {
         </div>
       </div>
     );
-  else
-    return (<div>Summoner not found</div>);
+  }
+  else {
+    return (
+      <div className="bg-background-default h-screen">
+        <SearchHeader />
+        <div className="container text-on-background-default text-center">
+          Summoner not found
+        </div>
+      </div>
+    );
+  }
 }

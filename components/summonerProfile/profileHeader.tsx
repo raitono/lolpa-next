@@ -10,8 +10,8 @@ const ProfileHeader: React.FC<ProfileHeaderProps> = ({ summonerName, summonerLev
   return (
     <>
       <div className="flex flex-col relative p-2 pt-4 bg-background-default">
-        <div className="relative w-[300px] m-auto">
-          <img className="rounded-full border-4 border-on-background-muted"
+        <div className="relative m-auto">
+          <img className="rounded-full border-4 border-on-background-muted w-[300px]"
             alt="Profile Icon"
             src={`http://ddragon.leagueoflegends.com/cdn/${process.env.NEXT_PUBLIC_CURRENT_PATCH}/img/profileicon/${profileIconId}.png`}></img>
           <div className="absolute bottom-0 right-0">

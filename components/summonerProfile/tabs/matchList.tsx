@@ -58,12 +58,12 @@ const MatchList: React.FC<MatchListProps> = ({ summonerName }: MatchListProps) =
         </div>
       );
     } else {
-      return <div className="text-center font-bold text-3xl">No matches found for {summonerName}</div>
+      return <div className="text-center font-bold text-3xl text-on-background-default">No matches found for {summonerName}</div>
     }
   }
 
   return (
-    <div className="text-center font-bold text-3xl">Loading matches for {summonerName}...</div>
+    <div className="text-center font-bold text-3xl text-on-background-default">Loading matches for {summonerName}...</div>
   );
 };
 

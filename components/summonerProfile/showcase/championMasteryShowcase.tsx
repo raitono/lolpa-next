@@ -27,7 +27,7 @@ const ChampionMasteryShowcase: React.FC<ChampionMasteryShowcaseProps> = ({ champ
     if (masteryData) {
       fetch(`${process.env.NEXT_PUBLIC_BASE_API_URL}/champion/${masteryData.championId}`)
         .then(res => res.json())
-        .then(res => setChampion(res.name));
+        .then(res => setChampion(res.id));
     } else {
       setChampion(championName)
     }

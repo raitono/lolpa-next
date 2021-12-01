@@ -24,13 +24,19 @@ export default async (req: NextApiRequest, res: NextApiResponse<ISummoner>) => {
     let summoner: ISummoner | undefined = await summonerRepo.findOne({ name });
 
     if (!summoner) {
-      console.debug(`Summoner ${name} not found, getting from Riot API...`)
-      const api = new LolApi(process.env.RIOT_API_KEY);
-      summoner = (await api.Summoner.getByName(name, Regions.AMERICA_NORTH)).response;
+      try {
+        console.debug(`Summoner ${name} not found, getting from Riot API...`)
+        const api = new LolApi(process.env.RIOT_API_KEY);
+        summoner = (await api.Summoner.getByName(name, Regions.AMERICA_NORTH)).response;
 
-      console.debug(`Creating new Summoner ${name}`)
-      const newSummoner = summonerRepo.create(summoner);
-      summonerRepo.save(newSummoner);
+        console.debug(`Creating new Summoner ${name}`)
+        const newSummoner = summonerRepo.create(summoner);
+        summonerRepo.save(newSummoner);
+      } catch (error: unknown) {
+        res.status(404).end();
+        return;
+      }
+
     } else {
       console.debug(`Getting Summoner ${name} from db...`)
     }
