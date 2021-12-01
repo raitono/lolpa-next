@@ -53,7 +53,7 @@ const MatchList: React.FC<MatchListProps> = ({ summonerName }: MatchListProps) =
   if (matches && runes) {
     if (matches.length) {
       return (
-        <div className="container px-3 mt-4">
+        <div className="mt-4">
           {matches.map(m => <MatchSummary key={m.metadata.matchId} match={m} summonerName={summonerName} runes={runes} />)}
         </div>
       );

@@ -24,9 +24,11 @@ export default function SummonerProfile() {
     return (
       <div className="bg-background-default h-full">
         <SearchHeader />
-        <ProfileHeader summonerName={summoner.name} summonerLevel={summoner.summonerLevel} profileIconId={summoner.profileIconId} ></ProfileHeader>
-        <ProfileShowcase summonerName={summoner.name} />
-        <MatchList summonerName={summoner.name} />
+        <div className="container">
+          <ProfileHeader summonerName={summoner.name} summonerLevel={summoner.summonerLevel} profileIconId={summoner.profileIconId} ></ProfileHeader>
+          <ProfileShowcase summonerName={summoner.name} />
+          <MatchList summonerName={summoner.name} />
+        </div>
       </div>
     );
   else

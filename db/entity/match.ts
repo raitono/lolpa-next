@@ -1,5 +1,5 @@
 import { BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { Participant } from "./Participant";
+import { Participant } from "./participant";
 import { Team } from "./team";
 
 @Entity()
