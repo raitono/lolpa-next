@@ -174,16 +174,16 @@ const MatchSummary: React.FC<MatchSummaryProps> = ({ summonerName, match, runes 
             </div>
           </div>
           <div className="flex-shrink max-w-[300px] grid grid-cols-9 grid-rows-team-info gap-x-1"> {/* Team information */}
-            {teamInfo.map(i => {
+            {teamInfo.map((i, idx) => {
               if (i) {
                 return (
-                  <div className="flex flex-col  bg-foreground-default items-center mb-1">
+                  <div key={idx} className="flex flex-col bg-foreground-default items-center mb-1">
                     <img alt={i.alt} className="mt-1 h-5 w-5" src={i.src} />
                     <div>{i.kills}</div>
                   </div>
                 )
               } else {
-                return <div>{/* empty div for middle space */}</div>
+                return <div key={idx}>{/* empty div for middle space */}</div>
               }
             })}
             {generateTeamInfoRow(match, TeamPosition.TOP)}
