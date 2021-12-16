@@ -22,8 +22,7 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "reflect-metadata": "^0.1.13",
-    "twisted": "^1.44.3",
-    "typeorm": "^0.2.40"
+    "twisted": "^1.44.3"
   },
   "devDependencies": {
     "@types/node": "^16.11.7",
