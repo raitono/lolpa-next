@@ -3,13 +3,13 @@ import { LolApi } from 'twisted';
 import { Regions } from 'twisted/dist/constants';
 import createConnection from '../../../../db/getConnection';
 import { Summoner as SummonerEntity } from '../../../../db/entity/summoner';
-import { ISummoner } from '../../../../models/summoner';
+import { Summoner } from '../../../../models/summoner';
 
 /**
  * Attempts to get a Summoner from the db
  * If not found, gets it from Riot instead
  */
-export default async (req: NextApiRequest, res: NextApiResponse<ISummoner>) => {
+export default async (req: NextApiRequest, res: NextApiResponse<Summoner>) => {
   if (!process.env.RIOT_API_KEY) {
     res.status(500).end({ message: "Riot API key missing" });
     return;
@@ -21,7 +21,7 @@ export default async (req: NextApiRequest, res: NextApiResponse<ISummoner>) => {
 
     const conn = await createConnection();
     const summonerRepo = conn.getRepository(SummonerEntity);
-    let summoner: ISummoner | undefined = await summonerRepo.findOne({ name });
+    let summoner: Summoner | undefined = await summonerRepo.findOne({ name });
 
     if (!summoner) {
       try {

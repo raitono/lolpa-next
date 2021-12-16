@@ -1,16 +1,13 @@
-import { BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { BaseEntity, Column, Entity, OneToMany, PrimaryColumn } from "typeorm";
 import { Participant } from "./participant";
 import { Team } from "./team";
 
 @Entity()
 export class Match extends BaseEntity {
-  @PrimaryGeneratedColumn()
-  public id?: number;
-
   // MetadataDto
   @Column()
   public dataVersion!: string;
-  @Column()
+  @PrimaryColumn()
   public matchId!: string;
   // public participants: string[]; // Not needed
 
