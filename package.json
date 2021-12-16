@@ -22,6 +22,7 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "reflect-metadata": "^0.1.13",
+    "sequelize": "^6.12.0-beta.3",
     "twisted": "^1.44.3"
   },
   "devDependencies": {
@@ -29,6 +30,7 @@
     "@types/react": "^17.0.8",
     "autoprefixer": "^10.3.7",
     "postcss": "^8.3.9",
+    "sequelize-cli": "^6.3.0",
     "tailwind-nord": "^1.2.0",
     "tailwindcss": "^2.2.17",
     "tailwindcss-theme-variants": "^2.0.0-alpha.2",
